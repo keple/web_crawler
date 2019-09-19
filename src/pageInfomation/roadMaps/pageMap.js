@@ -5,13 +5,8 @@ module.exports = {
         detailIdentifiers:['.name','.price-value','.arrival-info','.used-product-info'],
         pageNation:true,
         pagenationButtons:'.search-pagination a',
-        pagenationCurrent:'.selected',
-        pagenationProcessFunction:'dynamic'
+        pagenationCurrent:'.selected'
 
     }
-    /*"dcinside1" : {
-        baseUrl:'https://gall.dcinside.com/board/lists?id=warframe',
-        identifiers:'.ub-content',
-        detailIdentifiers:['.gall_num','.gall_tit','.gall_writer','.gall_tit a']
-    }*/
+
 };

@@ -3,24 +3,22 @@ let Collector = class{
         this.utils = utils;
     }
     async move(page,info){
-        //set user agent as desktop
-        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
-        let mvPro = undefined;
-        //move page
-        
-        if(info.getProp('currentPage')===undefined){
-            info.setProp({currentPage:1});
-            mvPro = page.goto(info.getProp('baseUrl'),{waitUntil:"networkidle2"});
-            if(!info.getProp('pageNation')){
-                return new Promise(resolve => 1)
-            }
-        }else{
+        //move page    
+        //evaluate script
+        if(info.getProp("pageNation") && info.getProp('currentPage')!==undefined){
             info.setProp({currentPage:info.getProp('currentPage')+1});
-            //evaluate script
-            let func  = this.utils.pageFncProvider(info);
-            mvPro = page.evaluate((args)=>{console.log(args);args.func();},{func:func})
+            let obj = {
+                currentPage : info.getProp('currentPage'),
+                pagenationButtons : info.getProp('pagenationButtons'),
+                pagenationCurrent : info.getProp('pagenationCurrent')
+            }
+            return page.evaluate(this.utils.pageFnc,{obj}).then(x=>page.waitFor(info.getProp('pagenationCurrent')));
+        }else{
+            info.setProp({currentPage:1});
+            return page.goto(info.getProp('baseUrl'),{waitUntil:"networkidle2"});    
         }
-        return mvPro;
+        
+
     }
     
     collectingStr(page,select,detailing){

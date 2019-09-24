@@ -5,8 +5,8 @@ module.exports = {
         detailIdentifiers:['.name','.price-value','.arrival-info','.used-product-info'],
         pageNation:true,
         pagenationButtons:'.search-pagination a',
-        pagenationCurrent:'.selected'
-
+        pagenationCurrent:'.search-pagination .selected',
+        maxPage : 10
     }
 
 };

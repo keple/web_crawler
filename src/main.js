@@ -14,11 +14,11 @@ function test(puppet,actObject,roadMaps){
     roadMaps.setProp({pageAble:false});
     //page Object
     return launchPromise.then((x)=>{return actObject.act(x,roadMaps)})
-                 .catch(x=> x.close());
+                 .catch((e)=> {console.warn(e);});
 }
 function launch(puppet,lauchSetting,roadMaps){
     return puppet.launch(lauchSetting)
-                 .then((browser) =>{roadMaps.setProp({browser:browser});return browser;})//savingPoint
+                 .then((browser) =>{roadMaps.setProp({browser:browser});return browser;})
                  .then(browser => browser.newPage())
                  .catch((x)=>{console.error(x);browser.close()});
 }

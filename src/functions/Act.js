@@ -5,9 +5,6 @@ let Act = class {
         this.collector = collector;
     }
     async act(page,info){
-        //setup userAgent
-        //need loop and merging data
-        //browser close when end of merging
         return await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36')
                   .then((x)=>this.loopWork(page,info));
         

@@ -26,6 +26,6 @@ let keys = Object.keys(PageMap);
 let promises = [];
 keys.forEach((x)=>{
     promises.push(test(puppet,actFunction,loader.LoadNodeObject(PageMap[x])));
-})
+});
 Promise.all(promises).then((x)=>{console.log(x);})
 

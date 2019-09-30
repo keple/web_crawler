@@ -12,7 +12,11 @@ let Collector = class{
                 pagenationButtons : info.getProp('pagenationButtons'),
                 pagenationCurrent : info.getProp('pagenationCurrent')
             }
-            return page.evaluate(this.utils.pageFnc,{obj}).then(x=>page.waitFor(info.getProp('pagenationCurrent')));
+            await page.waitForSelector(".search-pagination",{timeout:2000});
+
+            return page.click('.search-pagination a:nth-child('+info.getProp('currentPage')+')');
+            
+ 
         }else{
             info.setProp({currentPage:1});
             return page.goto(info.getProp('baseUrl'),{waitUntil:"networkidle2"});    
@@ -21,8 +25,9 @@ let Collector = class{
 
     }
     
-    collectingStr(page,select,detailing){
+    async collectingStr(page,select,detailing){
         //collect
+        await page.waitForSelector(select,{timeout:2000});
         let contentPro = page.evaluate((args)=>{
             let contents = document.querySelectorAll(args.select);
             let remakedContents = Array.prototype.map.call(contents,(x)=>{

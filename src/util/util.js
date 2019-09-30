@@ -8,8 +8,6 @@ class Util{
     pageFnc(info){
         let previousValue = info.currentPage;
         let pageButtons = document.querySelectorAll(info.pagenationButtons);
-        //find currentPage page value as number
-        //let currentValue = document.querySelector(info.pagenationCurrent);
         let temp = Array.prototype.filter.call(pageButtons,(x)=>{
             if(!isNaN(parseInt(x.innerText)) && previousValue<parseInt(x.innerText)){
                 return x;
@@ -26,6 +24,7 @@ class Util{
                 return x;
             }
         });
+        console.log("ss",info);
         console.log("remain",temp);
         console.log("test1",test);
         console.log("test2",test3);

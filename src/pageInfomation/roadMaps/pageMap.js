@@ -6,7 +6,7 @@ module.exports = {
         pageNation:true,
         pagenationButtons:'.search-pagination a',
         pagenationCurrent:'.search-pagination .selected',
-        maxPage : 10
+        maxPage : 9
     }
 
 };

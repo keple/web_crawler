@@ -1,22 +1,14 @@
 let Collector = class{
-    constructor(utils){
-        this.utils = utils;
+    constructor(){
     }
     async move(page,info){
-        //move page    
-        //evaluate script
+        //move page
         if(info.getProp("pageNation") && info.getProp('currentPage')!==undefined){
             info.setProp({currentPage:info.getProp('currentPage')+1});
-            let obj = {
-                currentPage : info.getProp('currentPage'),
-                pagenationButtons : info.getProp('pagenationButtons'),
-                pagenationCurrent : info.getProp('pagenationCurrent')
-            }
+           
             await page.waitForSelector(".search-pagination",{timeout:2000});
 
             return page.click('.search-pagination a:nth-child('+info.getProp('currentPage')+')');
-            
- 
         }else{
             info.setProp({currentPage:1});
             return page.goto(info.getProp('baseUrl'),{waitUntil:"networkidle2"});    
@@ -24,7 +16,6 @@ let Collector = class{
         
 
     }
-    
     async collectingStr(page,select,detailing){
         //collect
         await page.waitForSelector(select,{timeout:2000});

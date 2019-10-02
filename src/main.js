@@ -3,10 +3,9 @@ let Collector = require("./functions/Collector.js");
 let Act = require("./functions/Act.js");
 let PageMap = require("./pageInfomation/roadMaps/pageMap.js");
 let RoadMapLoader = require("./pageInfomation/roadMaps/RoadMapLoader.js");
-let Util = require("./util/util.js");
 let loader = new RoadMapLoader();
 
-let actFunction = new Act(new Collector(new Util()));
+let actFunction = new Act(new Collector());
 
 function test(puppet,actObject,roadMaps){
     let launchSetting = {headless:false};

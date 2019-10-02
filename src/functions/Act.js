@@ -7,8 +7,6 @@ let Act = class {
     async act(page,info){
         return await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36')
                   .then((x)=>this.loopWork(page,info));
-        
-        
     }
     async loopWork(page,info,prev){
         if(prev===undefined) prev=[];
@@ -17,7 +15,7 @@ let Act = class {
             this.collector.move(page,info)
                 .then((x)=>{
                     this.collector.collectingStr(page,info.getProp('identifiers'),info.getProp('detailIdentifiers'))
-                                  .then((x) => { console.log("cR",x);data = prev.concat(x)})
+                                  .then((x) => {data = prev.concat(x)})
                                   .then(()=>{
                                       console.log("second",info);
                                       info.getProp('currentPage')!==info.getProp('maxPage')

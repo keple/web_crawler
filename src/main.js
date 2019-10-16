@@ -2,29 +2,39 @@ const puppet = require("puppeteer");
 let Collector = require("./functions/Collector.js");
 let Act = require("./functions/Act.js");
 let PageMap = require("./pageInfomation/roadMaps/pageMap.js");
-let RoadMapLoader = require("./pageInfomation/roadMaps/RoadMapLoader.js");
-let loader = new RoadMapLoader();
+const FxJS = require("fxjs");
+const _ = require("fxjs/Strict");
+const L = require("fxjs/Lazy");
+const C = require("fxjs/Concurrency");
+const fs = require("file-system");
 
 let actFunction = new Act(new Collector());
-
-function test(puppet,actObject,roadMaps){
-    let launchSetting = {headless:false};
-    let launchPromise = launch(puppet,launchSetting,roadMaps);
-    roadMaps.setProp({pageAble:false});
-    //page Object
-    return launchPromise.then((x)=>{return actObject.act(x,roadMaps)})
-                 .catch((e)=> {console.warn(e);});
+let defaultLaunchSetting = {headless:false};
+async function test(page,actObject,node){
+    //page object
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
+    return actObject.doWork(page,node);
 }
-function launch(puppet,lauchSetting,roadMaps){
-    return puppet.launch(lauchSetting)
-                 .then((browser) =>{roadMaps.setProp({browser:browser});return browser;})
-                 .then(browser => browser.newPage())
-                 .catch((x)=>{console.error(x);browser.close()});
+async function launch(puppet,lauchSetting,node){
+    const browser = await puppet.launch(lauchSetting);
+    node.browser = browser;
+    return browser.newPage();
 }
 let keys = Object.keys(PageMap);
-let promises = [];
-keys.forEach((x)=>{
-    promises.push(test(puppet,actFunction,loader.LoadNodeObject(PageMap[x])));
+keys.forEach(async(ele)=>{
+    let page = await launch(puppet,defaultLaunchSetting,PageMap[ele]);
+    test(page,actFunction,PageMap[ele]).then(x=>{
+        let stringContent = JSON.stringify(x);
+        fs.mkdir('../result-data',function(err){
+            if(err) throw err;
+            console.log('maked');
+        });
+        fs.writeFile('../result-data/result'+ele,stringContent,function(err){
+            if(err) throw err;
+            console.log('saved!');
+        })
+    });
 });
-Promise.all(promises).then((x)=>{console.log(x);})
+
+
 

@@ -2,10 +2,7 @@ const puppet = require("puppeteer");
 let Collector = require("./functions/Collector.js");
 let Act = require("./functions/Act.js");
 let PageMap = require("./pageInfomation/roadMaps/pageMap.js");
-const FxJS = require("fxjs");
-const _ = require("fxjs/Strict");
-const L = require("fxjs/Lazy");
-const C = require("fxjs/Concurrency");
+
 const fs = require("file-system");
 
 let actFunction = new Act(new Collector());

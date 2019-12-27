@@ -24,11 +24,11 @@ keys.forEach(async(ele)=>{
         let stringContent = JSON.stringify(x);
         fs.mkdir('../result-data',function(err){
             if(err) throw err;
-            console.log('maked');
+           
         });
         fs.writeFile('../result-data/result'+ele,stringContent,function(err){
             if(err) throw err;
-            console.log('saved!');
+           
         })
     });
 });

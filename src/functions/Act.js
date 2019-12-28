@@ -2,6 +2,9 @@ let Act = class {
     constructor(collector){
         this.collector = collector;
     }
+    //작업
+    //login, search가 있는경우? =>
+    //function 조합?
     async doWork(page,info){
         let workingResult = [];
         await page.goto(info.baseUrl,{waitUntil:"networkidle2"});

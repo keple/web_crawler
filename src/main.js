@@ -1,6 +1,7 @@
 const puppet = require("puppeteer");
 let Collector = require("./functions/Collector.js");
 let Act = require("./functions/Act.js");
+let DataStorage = require('./functions/DataStorage.js');
 let PageMap = require("./pageInfomation/roadMaps/pageMap.js");
 
 const fs = require("file-system");
@@ -17,6 +18,7 @@ async function launch(puppet,lauchSetting,node){
     node.browser = browser;
     return browser.newPage();
 }
+
 let keys = Object.keys(PageMap);
 keys.forEach(async(ele)=>{
     let page = await launch(puppet,defaultLaunchSetting,PageMap[ele]);

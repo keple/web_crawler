@@ -5,10 +5,31 @@ let Act = class {
     //작업
     //login, search가 있는경우? =>
     //function 조합?
+    async tryCrawl(page,info){
+
+    }
+    async login(page,info){
+        let loginObject =  info.isLogin;
+        await page.goto(info.login.loginUrl,{waitUntil:'networkidle2'});
+        return await page.evaluate((args) => {
+            let info = args.loginInfo;
+            document.querySelector(info.id.elm)['value'](info.id.value);
+            document.querySelector(info.password.elm)['value'](info.value);
+            
+        },{loginInfo : loginObject});
+
+
+    }
+    //button click issue?
+    async clickAction(page,buttonInfo){
+       
+    }
     async doWork(page,info){
         let workingResult = [];
         await page.goto(info.baseUrl,{waitUntil:"networkidle2"});
         for(var i = 1; i < info.maxPage ; i++){
+            //move => 페이지이동
+            //wait => 페이지 이동 후 컨텐츠가 로딩될때까지 기다림...
             await this.move(page,info,i)
                       .then(async x=>{
                           await this.wait(page,info);

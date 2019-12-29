@@ -12,8 +12,14 @@ module.exports = {
         maxPage : 9,
         isLogin : {
             login:false,
-            loginId : '',
-            loginPw : '',
+            id: {
+                elm : '',
+                value : ''
+            },
+            password:{
+                elm : '',
+                value : ''
+            },
             loginButton:''
         },
         keywords:[],

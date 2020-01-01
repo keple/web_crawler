@@ -4,8 +4,14 @@ let Act = class {
     }
     //작업
     //login, search가 있는경우? =>
-    //function 조합?
-    async tryCrawl(page,info){
+    async search(page,info,index){
+        return await await page.evalutate((args)=>{
+            document.querySelector('searchElm')['value'](keywords[index]);
+            //search btn click 
+        },{searchInfo : info.isSearch});
+    }
+    //조합
+    async tryWork(page,info){
 
     }
     async login(page,info){
@@ -15,14 +21,10 @@ let Act = class {
             let info = args.loginInfo;
             document.querySelector(info.id.elm)['value'](info.id.value);
             document.querySelector(info.password.elm)['value'](info.value);
-            
+            //login btn click 
         },{loginInfo : loginObject});
 
 
-    }
-    //button click issue?
-    async clickAction(page,buttonInfo){
-       
     }
     async doWork(page,info){
         let workingResult = [];

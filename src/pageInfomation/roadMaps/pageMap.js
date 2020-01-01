@@ -22,7 +22,12 @@ module.exports = {
             },
             loginButton:''
         },
-        keywords:[],
-        searchButton:''
+        isSearch:{
+            keywords:[],
+            searchElm:'',
+            searchButton:''
+        }
+        
+        
     }
 };

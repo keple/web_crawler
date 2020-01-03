@@ -6,7 +6,4 @@ let storage  = class{
     async getLoginInfo(){
 
     }
-    async
-
-
 }

@@ -11,7 +11,7 @@ module.exports = {
         storage:[],
         maxPage : 9,
         isLogin : {
-            login:false,
+            flag:false,
             id: {
                 elm : '',
                 value : ''
@@ -23,6 +23,7 @@ module.exports = {
             loginButton:''
         },
         isSearch:{
+            flag:false,
             keywords:[],
             searchElm:'',
             searchButton:''

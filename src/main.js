@@ -1,4 +1,5 @@
 const puppet = require("puppeteer");
+const mkFlow = require("./functions/mkFlow.js");
 let Collector = require("./functions/Collector.js");
 let Act = require("./functions/Act.js");
 let DataStorage = require('./functions/DataStorage.js');

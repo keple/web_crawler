@@ -8,7 +8,11 @@ let Collector = class{
             let contents = document.querySelectorAll(args.select);
             let remakedContents = Array.prototype.map.call(contents,(x)=>{
                 let obj =  {};
-                args.ext.forEach((y,index)=>{obj[args.extMatch[index]] =x.querySelector(y).innerText;});
+                args.ext.forEach((y,index)=>{
+                    console.log('fromElement',x);
+                    let target = x.querySelector(y);
+                    obj[args.extMatch[index]] = target===null?'failure':target.innerText;
+                });
                 return obj;
             });
             return remakedContents;

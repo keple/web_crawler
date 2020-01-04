@@ -4,7 +4,9 @@ let MkFlow = class{
         let works = [];
         if(info.isLogin.flag) works.push('login');
         if(info.isSearch.flag) works.push('search');
-        if(info.pagination) works.push('move');
+        
+        works.push('doWork');
+
         return works;
     }
     

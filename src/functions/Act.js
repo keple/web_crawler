@@ -11,10 +11,11 @@ let Act = class {
             //search btn click 
         },{searchInfo : info.isSearch});
     }
-    //조합
+    
     async setPageAsBase(page,info){
         return await page.goto(info.baseUrl,{waitUntil:"networkidle2"});
     }
+    //조합
     async tryWork(page,info){
         let works = this.flowMaker.returnWorks(info);
         let self = this;
@@ -25,6 +26,7 @@ let Act = class {
         },this.setPageAsBase(page,info))
 
     }
+    //login
     async login(page,info){
         let loginObject =  info.isLogin;
         await page.goto(info.login.loginUrl,{waitUntil:'networkidle2'});

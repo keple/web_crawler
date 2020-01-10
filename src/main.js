@@ -24,7 +24,8 @@ let keys = Object.keys(PageMap);
 keys.forEach(async(ele)=>{
     let page = await launch(puppet,defaultLaunchSetting,PageMap[ele]);
     
-    test(page,actFunction,PageMap[ele]).then(x=>{
+    test(page,actFunction,PageMap[ele])
+    .then(x=>{
         let stringContent = JSON.stringify(x);
         fs.mkdir('../result-data',function(err){
             if(err) throw err;

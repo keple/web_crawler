@@ -9,6 +9,10 @@ let MkFlow = class{
 
         return works;
     }
+    setPriorityMap({map}){
+        this.priorityMap = map;
+        this.workNames = Object.keys(this.priorityMap);
+    }
     
 
 }

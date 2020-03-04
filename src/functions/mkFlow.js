@@ -1,5 +1,9 @@
 let MkFlow = class{
-
+    priorityMap = {
+        login : 0,
+        search : 1,
+        doWork : 2
+    }
     returnWorks(info){
         let works = [];
         if(info.isLogin.flag) works.push('login');
@@ -10,7 +14,8 @@ let MkFlow = class{
         return works;
     }
     setPriorityMap({map}){
-        this.priorityMap = map;
+        //login-> search-> doWork
+        this.priorityMap = map || this.priorityMap;
         this.workNames = Object.keys(this.priorityMap);
     }
     

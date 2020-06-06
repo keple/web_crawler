@@ -16,15 +16,17 @@ let Act = class {
         return await page.goto(info.baseUrl,{waitUntil:"networkidle2"});
     }
     //조합
-    async tryWork(page,info){
+    async tryWork(page,info, saver){
         let works = this.flowMaker.returnWorks(info);
         let self = this;
-        let workResult = works.reduce((accu,ele) => {
-            accu.then(() => {
-                accu = self[ele](page,info);
+        let workResult = works.map((ele) => {
+            this.setPageAsBase(page,info).then(() => {
+                return self[ele](page,info,saver);
             })
-        },this.setPageAsBase(page,info))
+        });
 
+        
+        
     }
     //login
     async login(page,info){
@@ -38,7 +40,7 @@ let Act = class {
         },{loginInfo : loginObject});
     }
     //페이지네이션 + 수집
-    async doWork(page,info){
+    async doWork(page,info,saver){
         let workingResult = [];
         
         
@@ -47,9 +49,10 @@ let Act = class {
             await this.move(page,info,i)
                       .then(async x=>{
                           await this.wait(page,info);
-                          workingResult = workingResult.concat(await this.collect({page:page,info:info}));
+                          workingResult = workingResult.concat(await this.collect({page:page,info:info,saver:saver,idx:i}));
                       });
         }
+        console.log(workingResult);
         return workingResult;
     }
     async move(page,info,index){
@@ -66,9 +69,10 @@ let Act = class {
                 ? await page.waitForSelector(info.paginationButtons,{timeout:4000})
                 : await page.waitForNavigation({waitUntil:'domcontentloaded',timeout:4000})
     }
-    async collect({page,info}){
+    async collect({page,info,saver,idx}){
         let result = await this.collector.collectingStr(page,info);
         console.log(result);
+        await saver.save(result,idx);
         return result;
     }
 }

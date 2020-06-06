@@ -1,8 +1,16 @@
 let MkFlow = class{
-    priorityMap = {
-        login : 0,
-        search : 1,
-        doWork : 2
+    
+    constructor(priorityMap){
+        if(!priorityMap){
+            this.setDefault();
+        }
+    }
+    setDefault(){
+        this.priorityMap = {
+            login : 0,
+            search : 1,
+            doWork : 2
+        }
     }
     returnWorks(info){
         let works = [];

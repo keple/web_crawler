@@ -1,7 +1,7 @@
 //sample data
 module.exports = {
     "coupang" : {
-        baseUrl:"https://www.coupang.com/np/search?q=cpu&channel=user&component=&eventCategory=SRP&trcid=&traid=&sorter=scoreDesc&minPrice=&maxPrice=&priceRange=&filterType=&listSize=36&filter=&isPriceRange=false&brand=&offerCondition=&rating=0&page=1&rocketAll=false&searchIndexingToken=&backgroundColor=",
+        baseUrl:"https://www.coupang.com/np/search?component=&q=%EB%8B%8C%ED%85%90%EB%8F%84&channel=user",
         identifiers:"#productList .search-product-wrap",
         extIdentifiers:['.name','.price-value','.delivery'],
         extMatch:['name','price','arrival'],
@@ -29,7 +29,7 @@ module.exports = {
             searchButton:''
         }
     },
-    /*"danawa" : {
+    "danawa" : {
         baseUrl : "http://search.danawa.com/dsearch.php?k1=cpu&module=goods&act=dispMain",
         identifiers:".product_list .prod_item",
         extIdentifiers:['.prod_name','.prod_spec_set','.price_sect'],
@@ -55,5 +55,5 @@ module.exports = {
             searchElm:'',
             searchButton:''
         }
-    }*/
+    }
 };

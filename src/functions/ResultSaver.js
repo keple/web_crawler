@@ -8,7 +8,7 @@ let ResultSaver = class{
             if(err) throw err;
            
         })
-        this.fs.writeFile('../result-data/result'+idx +".txt",stringContents,function(err){
+        this.fs.writeFile('../result-data/result'+idx +"page.txt",stringContents,function(err){
             if(err) throw err;
            
         })

@@ -43,13 +43,15 @@ let Act = class {
     async doWork(page,info,saver){
         let workingResult = [];
         
-        
         for(var i = 1; i < info.maxPage ; i++){
             
             await this.move(page,info,i)
                       .then(async x=>{
-                          await this.wait(page,info);
+                          await this.wait(page,info , i);
                           workingResult = workingResult.concat(await this.collect({page:page,info:info,saver:saver,idx:i}));
+                      })
+                      .catch(async x =>{
+                          console.error(x);
                       });
         }
         console.log(workingResult);
@@ -64,10 +66,17 @@ let Act = class {
         }
     }
     //timeout 4sec;
-    async wait(page,info){
-        return info.pagination
-                ? await page.waitForSelector(info.paginationButtons,{timeout:4000})
-                : await page.waitForNavigation({waitUntil:'domcontentloaded',timeout:4000})
+    async wait(page,info, index){
+        try{
+            return info.pagination
+                    ? await page.waitForSelector(info.paginationButtons,{timeout:4000})
+                    : await page.waitForNavigation({waitUntil:'domcontentloaded',timeout:4000})
+        }catch(error){
+            console.error(error);
+            return 
+        }finally{
+            console.log(index);
+        }
     }
     async collect({page,info,saver,idx}){
         let result = await this.collector.collectingStr(page,info);
